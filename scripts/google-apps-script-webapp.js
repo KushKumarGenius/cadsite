@@ -39,7 +39,9 @@ function doPost(e) {
       return jsonOut(false, "Bad JSON");
     }
 
-    if (data.webhookSecret !== expected) {
+    var incoming = String(data.webhookSecret || "").trim();
+    var expectedTrim = String(expected || "").trim();
+    if (incoming !== expectedTrim) {
       return jsonOut(false, "Forbidden");
     }
 

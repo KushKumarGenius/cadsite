@@ -4,6 +4,18 @@
  * See scripts/google-apps-script-webapp.js for the Sheet-side code.
  */
 
+/** Makes Apps Script errors actionable without exposing internals to logs */
+function humanizeSheetScriptError(raw: string | undefined): string {
+  if (raw === "Forbidden") {
+    return (
+      "Could not verify the form (secret mismatch). If you run the site: in Vercel → Environment Variables, " +
+      "set GOOGLE_SHEETS_WEBHOOK_SECRET to the exact same value as WEBHOOK_SECRET in Apps Script " +
+      "(Project settings → Script properties). Redeploy after changing env vars."
+    );
+  }
+  return raw ?? "Something went wrong.";
+}
+
 function sheetEnvError(): string | null {
   const url = process.env.GOOGLE_SHEETS_WEB_APP_URL?.trim();
   const secret = process.env.GOOGLE_SHEETS_WEBHOOK_SECRET?.trim();
@@ -52,7 +64,9 @@ export async function postToGoogleSheetWebApp(payload: Record<string, unknown>) 
     if (!res.ok) {
       return {
         ok: false as const,
-        error: parsed?.error ?? res.statusText ?? "Sheet webhook failed",
+        error: parsed?.error
+          ? humanizeSheetScriptError(parsed.error)
+          : (res.statusText ?? "Sheet webhook failed"),
         status: res.status,
       };
     }
@@ -66,7 +80,7 @@ export async function postToGoogleSheetWebApp(payload: Record<string, unknown>) 
         ok: false as const,
         error:
           parsed?.ok === false && parsed.error
-            ? parsed.error
+            ? humanizeSheetScriptError(parsed.error)
             : `The sheet script did not return success JSON. Use the Web app deployment URL (ends with /exec), not the editor URL. Response preview: ${preview}`,
         status: 502,
       };
