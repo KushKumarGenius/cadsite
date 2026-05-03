@@ -1,6 +1,8 @@
-# CAD Crew signup API (Django)
+# CAD Crew signup API (Django) — optional
 
-Stores sign-up form submissions in the **Django admin** only (`/admin/`). The public Next.js site never talks to Django directly from the browser — it posts to a Next.js route that forwards requests here with a shared secret.
+The site stores submissions in **Google Sheets** by default (see `scripts/google-apps-script-webapp.js` and `.env.local.example`). Use this Django app only if you want an **admin database** instead of (or in addition to) Sheets.
+
+Stores sign-up form submissions in the **Django admin** only (`/admin/`). The Next.js `/api/signup` route now targets **Google Sheets**, not Django — Django would require wiring that route again if you prefer SQLite/admin only.
 
 ## Setup (local)
 

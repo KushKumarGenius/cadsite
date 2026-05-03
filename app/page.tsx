@@ -31,10 +31,10 @@ export default function HomePage() {
             <p className="text-base font-medium text-[var(--muted)]">
               Grades 3–8 · Library · Jul 13–23, 2026
             </p>
-            <h1 className="font-display mt-4 text-5xl font-semibold tracking-tight text-[var(--brand-burgundy-dark)] sm:text-6xl lg:text-7xl">
+            <h1 className="font-display mt-4 break-words text-5xl font-semibold tracking-tight text-[var(--brand-burgundy-dark)] sm:text-6xl lg:text-7xl">
               CAD Crew
             </h1>
-            <p className="mt-5 max-w-2xl text-xl leading-relaxed text-[var(--muted)] sm:text-2xl sm:leading-relaxed">
+            <p className="mt-5 max-w-2xl break-words text-xl leading-relaxed text-[var(--muted)] sm:text-2xl sm:leading-relaxed">
               A relaxed, hands-on CAD and design class — draw, build a little, and present something
               you care about. Summer{" "}
               <strong className="font-semibold text-[var(--brand-burgundy-dark)]">July 13–23, 2026</strong>

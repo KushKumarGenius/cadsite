@@ -10,9 +10,13 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 
+# Include 0.0.0.0 so requests to http://0.0.0.0:8000/ work when using runserver 0.0.0.0:8000
 ALLOWED_HOSTS = [
     h.strip()
-    for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+    for h in os.environ.get(
+        "DJANGO_ALLOWED_HOSTS",
+        "127.0.0.1,localhost,0.0.0.0",
+    ).split(",")
     if h.strip()
 ]
 

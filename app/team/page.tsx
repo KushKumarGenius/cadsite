@@ -7,9 +7,10 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { name: "Alex Morgan", role: "Program Director" },
-  { name: "Jordan Kim", role: "Lead Facilitator" },
-  { name: "Sam Rivera", role: "Library Partnerships" },
+  "Shreyas Doke",
+  "Elina Polavarapu",
+  "Kushagr Kumar",
+  "Krishna Batni",
 ] as const;
 
 export default function TeamPage() {
@@ -20,20 +21,19 @@ export default function TeamPage() {
         <h1 className="font-display mt-2 text-3xl font-semibold text-[var(--brand-burgundy-dark)] sm:text-4xl">
           People
         </h1>
-        <p className="mt-3 text-[var(--muted)]">Placeholder names — swap in your real team anytime.</p>
+        <p className="mt-3 text-[var(--muted)]">The folks helping run CAD Crew.</p>
       </header>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {team.map((person) => (
-          <ContentCard key={person.name} className="!p-5 text-center">
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {team.map((name) => (
+          <ContentCard key={name} className="!p-5 text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand-coral-soft)] text-sm font-medium text-[var(--brand-burgundy-dark)]">
-              {person.name
+              {name
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
             </div>
-            <p className="mt-4 font-medium text-[var(--brand-burgundy-dark)]">{person.name}</p>
-            <p className="mt-0.5 text-sm text-[var(--muted)]">{person.role}</p>
+            <p className="mt-4 font-medium text-[var(--brand-burgundy-dark)]">{name}</p>
           </ContentCard>
         ))}
       </div>

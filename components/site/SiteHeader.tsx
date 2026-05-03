@@ -30,8 +30,9 @@ export function SiteHeader() {
             alt="CAD Crew"
             width={200}
             height={64}
-            className="h-10 w-auto origin-left transition-transform duration-300 ease-out group-hover:scale-[1.04] sm:h-11"
+            className="h-9 max-h-10 w-auto max-w-[min(200px,58vw)] origin-left object-contain object-left transition-transform duration-300 ease-out group-hover:scale-[1.04] sm:h-11 sm:max-w-[200px]"
             priority
+            sizes="(max-width: 640px) 58vw, 200px"
           />
           <span className="hidden flex-col items-start text-[var(--muted)] transition-colors duration-200 group-hover:text-[var(--brand-burgundy-dark)] sm:flex">
             <span className="text-base font-medium text-[var(--brand-burgundy-dark)]">CAD Crew</span>
@@ -42,7 +43,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--border)] text-[var(--brand-burgundy-dark)] transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95 md:hidden"
+            className="flex h-11 min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl border border-[color:var(--border)] text-[var(--brand-burgundy-dark)] transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95 md:hidden"
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}

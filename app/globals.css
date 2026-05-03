@@ -31,6 +31,12 @@
   }
 }
 
+/* Mobile: avoid iOS auto-zoom jank on orientation / font scaling */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 /* CAD Crew logo palette: coral field, burgundy eagle & type, black outlines */
 :root {
   --brand-coral: #ff5e5e;
