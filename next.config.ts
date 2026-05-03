@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Hides the default route / build activity indicator (often confused with product UI).
+  devIndicators: false,
 };
 
 export default nextConfig;
