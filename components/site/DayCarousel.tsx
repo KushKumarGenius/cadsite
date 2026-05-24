@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 /** Program days (Mon–Thu only), Jul 13–23, 2026 — copy is editable anytime */
@@ -53,8 +53,9 @@ const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 export function DayCarousel() {
   const [index, setIndex] = useState(0);
-  const [hover, setHover] = useState(false);
-  const touchY = useRef<number | null>(null);
+  const [paused, setPaused] = useState(false);
+  const touchX = useRef<number | null>(null);
+  const swiped = useRef(false);
   const reducedMotion = useRef(false);
 
   useEffect(() => {
@@ -72,22 +73,22 @@ export function DayCarousel() {
   }, []);
 
   useEffect(() => {
-    if (hover) return;
+    if (paused) return;
     const id = window.setInterval(() => {
       if (reducedMotion.current) return;
       setIndex((i) => (i + 1) % SLIDE_COUNT);
     }, 5500);
     return () => window.clearInterval(id);
-  }, [hover]);
+  }, [paused]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         e.preventDefault();
         go(1);
       }
-      if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         e.preventDefault();
         go(-1);
       }
@@ -96,39 +97,65 @@ export function DayCarousel() {
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
 
-  const pct = (100 / SLIDE_COUNT) * index;
+  const active = sessions[index];
+
+  const pause = () => setPaused(true);
+  const resume = () => setPaused(false);
 
   return (
     <div
-      className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-5"
+      className="mt-6 space-y-4"
       role="region"
       aria-label="Day by day schedule"
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      aria-roledescription="carousel"
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      onFocusCapture={pause}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) resume();
+      }}
+      onTouchStart={pause}
+      onTouchEnd={resume}
     >
-      <div className="relative h-[18rem] flex-1 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--card)] shadow-[0_1px_2px_rgb(74_21_21/0.04)] sm:h-[19rem]">
+      <div className="relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[var(--card)] shadow-[0_1px_2px_rgb(74_21_21/0.04)]">
         <div
-          className="flex flex-col transition-transform duration-500 will-change-transform motion-reduce:transition-none"
+          className="flex touch-pan-y transition-transform duration-500 will-change-transform motion-reduce:transition-none"
           style={{
-            transform: `translateY(-${pct}%)`,
+            transform: `translateX(-${index * 100}%)`,
             transitionTimingFunction: ease,
           }}
           onTouchStart={(e) => {
-            touchY.current = e.touches[0].clientY;
+            swiped.current = false;
+            touchX.current = e.touches[0].clientX;
           }}
           onTouchEnd={(e) => {
-            if (touchY.current == null) return;
-            const y = e.changedTouches[0].clientY;
-            const d = touchY.current - y;
-            touchY.current = null;
-            if (d > 48) go(1);
-            else if (d < -48) go(-1);
+            if (touchX.current == null) return;
+            const x = e.changedTouches[0].clientX;
+            const d = touchX.current - x;
+            touchX.current = null;
+            if (d > 40) {
+              swiped.current = true;
+              go(1);
+            } else if (d < -40) {
+              swiped.current = true;
+              go(-1);
+            }
           }}
         >
           {sessions.map((s, i) => (
-            <div
+            <button
               key={s.key}
-              className="flex h-[18rem] shrink-0 flex-col justify-center px-6 py-7 sm:h-[19rem] sm:px-8"
+              type="button"
+              aria-hidden={i !== index}
+              tabIndex={i === index ? 0 : -1}
+              onClick={() => {
+                if (swiped.current) {
+                  swiped.current = false;
+                  return;
+                }
+                go(1);
+              }}
+              className="flex w-full shrink-0 cursor-pointer flex-col justify-center px-5 py-6 text-left touch-manipulation sm:px-8 sm:py-8"
             >
               <p className="text-xs font-medium uppercase tracking-wide text-[var(--brand-coral)]">
                 Day {i + 1} of {SLIDE_COUNT}
@@ -137,51 +164,67 @@ export function DayCarousel() {
                 {s.headline}
               </p>
               <p className="mt-3 text-base leading-relaxed text-[var(--muted)] sm:text-lg">{s.body}</p>
-            </div>
+              <p className="mt-4 text-xs text-[var(--muted)] sm:hidden">Tap card or swipe for next day</p>
+            </button>
           ))}
         </div>
-
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[var(--card)] to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[var(--card)] to-transparent" />
       </div>
 
-      <div className="flex flex-row items-center justify-center gap-2 sm:flex-col sm:justify-between sm:py-1">
+      <div className="flex items-center gap-3">
         <button
           type="button"
           aria-label="Previous day"
           onClick={() => go(-1)}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[color:var(--border)] bg-white text-[var(--brand-burgundy-dark)] shadow-sm transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95 sm:h-10 sm:w-10"
+          className="flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-xl border border-[color:var(--border)] bg-white text-[var(--brand-burgundy-dark)] shadow-sm transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95"
         >
-          <ChevronUp className="h-5 w-5" />
+          <ChevronLeft className="h-5 w-5" />
         </button>
 
-        <div className="flex max-h-[11rem] flex-row flex-wrap justify-center gap-1.5 overflow-y-auto py-1 sm:max-h-none sm:flex-col sm:gap-2 sm:overflow-visible">
-          {sessions.map((s, i) => (
-            <button
-              key={s.key}
-              type="button"
-              aria-label={`Go to ${s.headline}`}
-              aria-current={i === index || undefined}
-              onClick={() => setIndex(i)}
-              className={cn(
-                "h-2 shrink-0 rounded-full transition-all duration-300 ease-out sm:h-2 sm:w-2",
-                i === index
-                  ? "w-8 bg-[var(--brand-coral)] sm:h-8 sm:w-2"
-                  : "w-2 bg-[color:var(--border)] hover:bg-[var(--brand-coral-muted)] sm:w-2",
-              )}
-            />
-          ))}
+        <div className="min-w-0 flex-1">
+          <p className="text-center text-sm font-medium tabular-nums text-[var(--brand-burgundy-dark)]">
+            Day {index + 1} of {SLIDE_COUNT}
+          </p>
+          <div className="mt-2 flex justify-center gap-1.5 overflow-x-auto px-1 py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {sessions.map((s, i) => (
+              <button
+                key={s.key}
+                type="button"
+                aria-label={`Go to ${s.headline}`}
+                aria-current={i === index || undefined}
+                onClick={() => setIndex(i)}
+                className={cn(
+                  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-300 ease-out",
+                  i === index
+                    ? "bg-[var(--brand-coral-soft)]"
+                    : "hover:bg-[var(--brand-coral-soft)]/60",
+                )}
+              >
+                <span
+                  className={cn(
+                    "block rounded-full transition-all duration-300 ease-out",
+                    i === index
+                      ? "h-2.5 w-7 bg-[var(--brand-coral)]"
+                      : "h-2 w-2 bg-[color:var(--border)]",
+                  )}
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
         <button
           type="button"
           aria-label="Next day"
           onClick={() => go(1)}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[color:var(--border)] bg-white text-[var(--brand-burgundy-dark)] shadow-sm transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95 sm:h-10 sm:w-10"
+          className="flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-xl border border-[color:var(--border)] bg-white text-[var(--brand-burgundy-dark)] shadow-sm transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95"
         >
-          <ChevronDown className="h-5 w-5" />
+          <ChevronRight className="h-5 w-5" />
         </button>
       </div>
+
+      <p className="sr-only" aria-live="polite">
+        {active.headline}: {active.body}
+      </p>
     </div>
   );
 }

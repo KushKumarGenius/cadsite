@@ -60,7 +60,7 @@ export function QuickFactsStrip() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="animate-fade-in-up motion-reduce:animate-none motion-reduce:delay-0 [animation-delay:90ms]">
           <p className="text-base font-semibold text-[var(--brand-burgundy)]">Quick facts</p>
-          <div className="mt-6 grid gap-8 sm:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-8">
             <div
               className="animate-scale-in motion-reduce:animate-none rounded-2xl bg-white/60 p-4 shadow-sm backdrop-blur-sm"
               style={{ animationDelay: "140ms" }}

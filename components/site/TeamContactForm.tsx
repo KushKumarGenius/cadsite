@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { ContentCard } from "@/components/site/ContentCard";
 
+const fieldClass =
+  "mt-1 w-full min-h-11 rounded-lg border border-[color:var(--border)] px-3 py-2.5 text-base text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.2)]";
+
 export function TeamContactForm() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -57,7 +60,7 @@ export function TeamContactForm() {
             required
             name="name"
             autoComplete="name"
-            className="mt-1 w-full rounded-lg border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.2)]"
+            className={fieldClass}
           />
         </label>
         <label className="block text-sm">
@@ -66,7 +69,7 @@ export function TeamContactForm() {
             required
             name="message"
             rows={3}
-            className="mt-1 w-full resize-y rounded-lg border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.2)]"
+            className={`${fieldClass} resize-y`}
           />
         </label>
 
@@ -79,7 +82,7 @@ export function TeamContactForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-full bg-[var(--brand-coral)] px-5 py-2 text-sm font-medium text-white transition hover:bg-[var(--brand-coral-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex min-h-11 touch-manipulation items-center justify-center rounded-full bg-[var(--brand-coral)] px-5 py-2.5 text-base font-medium text-white transition hover:bg-[var(--brand-coral-hover)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? "Sending…" : "Send"}
         </button>

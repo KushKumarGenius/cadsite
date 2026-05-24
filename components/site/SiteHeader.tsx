@@ -18,7 +18,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="animate-fade-in motion-reduce:animate-none sticky top-0 z-50 border-b border-[color:var(--border)] bg-white/90 backdrop-blur-md transition-[box-shadow,background-color] duration-500 supports-[backdrop-filter]:bg-white/75 hover:shadow-[0_8px_30px_rgb(74_21_21/0.06)]">
+    <header className="animate-fade-in motion-reduce:animate-none sticky top-0 z-50 border-b border-[color:var(--border)] bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-md transition-[box-shadow,background-color] duration-500 supports-[backdrop-filter]:bg-white/75 hover:shadow-[0_8px_30px_rgb(74_21_21/0.06)]">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3.5 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -41,6 +41,13 @@ export function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <Link
+            href="/signup"
+            className="inline-flex h-10 touch-manipulation items-center justify-center rounded-full bg-[var(--brand-coral)] px-4 text-sm font-semibold text-white shadow-[0_4px_14px_rgb(255_94_94/0.35)] transition-all duration-200 hover:bg-[var(--brand-coral-hover)] active:scale-[0.98] md:hidden"
+            onClick={() => setOpen(false)}
+          >
+            Sign up
+          </Link>
           <button
             type="button"
             className="flex h-11 min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl border border-[color:var(--border)] text-[var(--brand-burgundy-dark)] transition-all duration-200 hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-95 md:hidden"

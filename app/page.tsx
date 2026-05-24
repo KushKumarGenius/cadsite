@@ -31,10 +31,10 @@ export default function HomePage() {
             <p className="text-base font-medium text-[var(--muted)]">
               Grades 3–8 · Library · Jul 13–23, 2026
             </p>
-            <h1 className="font-display mt-4 break-words text-5xl font-semibold tracking-tight text-[var(--brand-burgundy-dark)] sm:text-6xl lg:text-7xl">
+            <h1 className="font-display mt-4 break-words text-4xl font-semibold tracking-tight text-[var(--brand-burgundy-dark)] min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
               CAD Crew
             </h1>
-            <p className="mt-5 max-w-2xl break-words text-xl leading-relaxed text-[var(--muted)] sm:text-2xl sm:leading-relaxed">
+            <p className="mt-5 max-w-2xl break-words text-lg leading-relaxed text-[var(--muted)] min-[420px]:text-xl sm:text-2xl sm:leading-relaxed">
               A relaxed, hands-on CAD and design class — draw, build a little, and present something
               you care about. Summer{" "}
               <strong className="font-semibold text-[var(--brand-burgundy-dark)]">July 13–23, 2026</strong>
@@ -43,16 +43,16 @@ export default function HomePage() {
               <strong className="font-semibold text-[var(--brand-burgundy-dark)]">90 minutes</strong> with a
               break in the middle.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:gap-4">
               <Link
                 href="/signup"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--brand-coral)] px-8 text-base font-semibold text-white shadow-[0_6px_20px_rgb(255_94_94/0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[var(--brand-coral-hover)] hover:shadow-[0_10px_28px_rgb(255_94_94/0.42)] active:scale-[0.98]"
+                className="inline-flex h-12 w-full touch-manipulation items-center justify-center rounded-full bg-[var(--brand-coral)] px-8 text-base font-semibold text-white shadow-[0_6px_20px_rgb(255_94_94/0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[var(--brand-coral-hover)] hover:shadow-[0_10px_28px_rgb(255_94_94/0.42)] active:scale-[0.98] min-[420px]:w-auto"
               >
                 Sign up
               </Link>
               <Link
                 href="/about"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-[color:var(--border)] bg-white px-8 text-base font-semibold text-[var(--brand-burgundy-dark)] transition-all duration-200 hover:scale-[1.03] hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-[0.98]"
+                className="inline-flex h-12 w-full touch-manipulation items-center justify-center rounded-full border border-[color:var(--border)] bg-white px-8 text-base font-semibold text-[var(--brand-burgundy-dark)] transition-all duration-200 hover:scale-[1.03] hover:border-[var(--brand-coral-muted)] hover:bg-[var(--brand-coral-soft)] active:scale-[0.98] min-[420px]:w-auto"
               >
                 About
               </Link>
@@ -93,19 +93,19 @@ export default function HomePage() {
           <ContentCard>
             <p className="text-base font-medium text-[var(--muted)]">Schedule</p>
             <dl className="mt-3 space-y-3 text-base">
-              <div className="flex justify-between gap-4 border-b border-[color:var(--border)] pb-3">
+              <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Dates</dt>
-                <dd className="text-right font-medium text-[var(--brand-burgundy-dark)]">Jul 13–23, 2026</dd>
+                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">Jul 13–23, 2026</dd>
               </div>
-              <div className="flex justify-between gap-4 border-b border-[color:var(--border)] pb-3">
+              <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Sessions</dt>
-                <dd className="text-right font-medium text-[var(--brand-burgundy-dark)]">
+                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">
                   90 min + break
                 </dd>
               </div>
-              <div className="flex justify-between gap-4">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Days</dt>
-                <dd className="text-right font-medium text-[var(--brand-burgundy-dark)]">Mon–Thu</dd>
+                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">Mon–Thu</dd>
               </div>
             </dl>
           </ContentCard>
@@ -117,8 +117,8 @@ export default function HomePage() {
             What each session might look like
           </h2>
           <p className="mt-2 max-w-2xl text-base text-[var(--muted)]">
-            Eight meeting days — Monday through Thursday, July 13–23, 2026 (weekends off). Flip through
-            or let it autoplay.
+            Eight meeting days — Monday through Thursday, July 13–23, 2026 (weekends off). Swipe or tap
+            to flip through, or let it autoplay.
           </p>
           <DayCarousel />
         </section>

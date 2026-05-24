@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { ContentCard } from "@/components/site/ContentCard";
 
+const fieldClass =
+  "mt-1.5 w-full min-h-11 rounded-md border border-[color:var(--border)] px-3 py-2.5 text-base text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]";
+
+const textareaClass =
+  "mt-1.5 w-full resize-y rounded-md border border-[color:var(--border)] px-3 py-2.5 text-base text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]";
+
 export function SignUpForm() {
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -64,7 +70,7 @@ export function SignUpForm() {
             required
             name="studentName"
             autoComplete="name"
-            className="mt-1.5 w-full rounded-md border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]"
+            className={fieldClass}
           />
         </label>
         <label className="block text-sm sm:col-span-2">
@@ -73,7 +79,7 @@ export function SignUpForm() {
             required
             name="parentName"
             autoComplete="name"
-            className="mt-1.5 w-full rounded-md border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]"
+            className={fieldClass}
           />
         </label>
         <label className="block text-sm">
@@ -81,7 +87,7 @@ export function SignUpForm() {
           <select
             required
             name="grade"
-            className="mt-1.5 w-full rounded-md border border-[color:var(--border)] bg-white px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]"
+            className={`${fieldClass} bg-white`}
           >
             <option value="">Select grade</option>
             <option>3rd</option>
@@ -99,7 +105,7 @@ export function SignUpForm() {
             type="email"
             name="email"
             autoComplete="email"
-            className="mt-1.5 w-full rounded-md border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]"
+            className={fieldClass}
           />
         </label>
 
@@ -114,7 +120,7 @@ export function SignUpForm() {
             name="priorCadKnowledge"
             rows={3}
             placeholder="e.g. Tinkercad at school, none yet, etc."
-            className="mt-1.5 w-full resize-y rounded-md border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]"
+            className={textareaClass}
           />
         </label>
 
@@ -124,7 +130,7 @@ export function SignUpForm() {
             required
             name="why"
             rows={4}
-            className="mt-1.5 w-full resize-y rounded-md border border-[color:var(--border)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]"
+            className={textareaClass}
           />
         </label>
 
@@ -138,7 +144,7 @@ export function SignUpForm() {
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-full bg-[var(--brand-coral)] px-8 py-2.5 text-sm font-medium text-white transition hover:bg-[var(--brand-coral-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex min-h-11 touch-manipulation items-center justify-center rounded-full bg-[var(--brand-coral)] px-8 py-2.5 text-base font-medium text-white transition hover:bg-[var(--brand-coral-hover)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {submitting ? "Sending…" : "Submit"}
           </button>
