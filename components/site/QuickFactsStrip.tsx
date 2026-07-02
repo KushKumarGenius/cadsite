@@ -80,7 +80,7 @@ export function QuickFactsStrip() {
                 {minutes}
                 <span className="text-[var(--muted)]"> minutes</span>
               </p>
-              <p className="mt-2 text-sm text-[var(--muted)]">Includes a break in the middle.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">12–1:30 PM · Cupertino Library</p>
             </div>
             <div
               className="animate-scale-in motion-reduce:animate-none rounded-2xl bg-white/60 p-4 shadow-sm backdrop-blur-sm"

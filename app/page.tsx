@@ -29,7 +29,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <div className="animate-fade-in-up motion-reduce:animate-none">
             <p className="text-base font-medium text-[var(--muted)]">
-              Grades 3–8 · Library · Jul 13–23, 2026
+              Grades 3–8 · Cupertino Library · Jul 13–23, 2026
             </p>
             <h1 className="font-display mt-4 break-words text-4xl font-semibold tracking-tight text-[var(--brand-burgundy-dark)] min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
               CAD Crew
@@ -40,8 +40,9 @@ export default function HomePage() {
               <strong className="font-semibold text-[var(--brand-burgundy-dark)]">July 13–23, 2026</strong>
               , meeting <strong className="font-semibold text-[var(--brand-burgundy-dark)]">Mon–Thu</strong>{" "}
               — each session is{" "}
-              <strong className="font-semibold text-[var(--brand-burgundy-dark)]">90 minutes</strong> with a
-              break in the middle.
+              <strong className="font-semibold text-[var(--brand-burgundy-dark)]">12–1:30 PM</strong>{" "}
+              at the <strong className="font-semibold text-[var(--brand-burgundy-dark)]">Cupertino Library</strong>{" "}
+              (90 minutes with a break in the middle).
             </p>
             <div className="mt-10 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:gap-4">
               <Link
@@ -86,8 +87,8 @@ export default function HomePage() {
           <ContentCard>
             <p className="text-base font-medium text-[var(--muted)]">Goals</p>
             <p className="mt-3 text-lg leading-relaxed text-[var(--brand-burgundy-dark)]">
-              Hands-on CAD and product design for 3rd–8th graders at the library — July 13–23, 2026,
-              Mon–Thu. Big on creativity and keeping things understandable.
+              Hands-on CAD and product design for 3rd–8th graders at the Cupertino Library — July 13–23, 2026,
+              Mon–Thu, 12–1:30 PM. Big on creativity and keeping things understandable.
             </p>
           </ContentCard>
           <ContentCard>
@@ -96,6 +97,14 @@ export default function HomePage() {
               <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Dates</dt>
                 <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">Jul 13–23, 2026</dd>
+              </div>
+              <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <dt className="text-[var(--muted)]">Time</dt>
+                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">12–1:30 PM</dd>
+              </div>
+              <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <dt className="text-[var(--muted)]">Where</dt>
+                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">Cupertino Library</dd>
               </div>
               <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Sessions</dt>

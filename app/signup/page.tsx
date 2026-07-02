@@ -16,8 +16,9 @@ export default function SignUpPage() {
         <p className="mt-3 text-[var(--muted)]">
           Program runs <strong className="font-medium text-[var(--brand-burgundy-dark)]">July 13–23, 2026</strong>
           , <strong className="font-medium text-[var(--brand-burgundy-dark)]">Mon–Thu</strong>,{" "}
-          <strong className="font-medium text-[var(--brand-burgundy-dark)]">90-minute</strong> sessions
-          (break in the middle). Fill this out and we&apos;ll follow up by email.
+          <strong className="font-medium text-[var(--brand-burgundy-dark)]">12–1:30 PM</strong> at the{" "}
+          <strong className="font-medium text-[var(--brand-burgundy-dark)]">Cupertino Library</strong>{" "}
+          (90-minute sessions with a break). Fill this out and we&apos;ll follow up by email.
         </p>
       </header>
 
