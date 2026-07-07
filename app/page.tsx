@@ -40,7 +40,7 @@ export default function HomePage() {
               <strong className="font-semibold text-[var(--brand-burgundy-dark)]">July 13–23, 2026</strong>
               , meeting <strong className="font-semibold text-[var(--brand-burgundy-dark)]">Mon–Thu</strong>{" "}
               — each session is{" "}
-              <strong className="font-semibold text-[var(--brand-burgundy-dark)]">12–1:30 PM</strong>{" "}
+              <strong className="font-semibold text-[var(--brand-burgundy-dark)]">11:30–1:00 PM</strong>{" "}
               at the <strong className="font-semibold text-[var(--brand-burgundy-dark)]">Cupertino Library</strong>{" "}
               (90 minutes with a break in the middle).
             </p>
@@ -88,7 +88,7 @@ export default function HomePage() {
             <p className="text-base font-medium text-[var(--muted)]">Goals</p>
             <p className="mt-3 text-lg leading-relaxed text-[var(--brand-burgundy-dark)]">
               Hands-on CAD and product design for 3rd–8th graders at the Cupertino Library — July 13–23, 2026,
-              Mon–Thu, 12–1:30 PM. Big on creativity and keeping things understandable.
+              Mon–Thu, 11:30–1:00 PM. Big on creativity and keeping things understandable.
             </p>
           </ContentCard>
           <ContentCard>
@@ -100,7 +100,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Time</dt>
-                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">12–1:30 PM</dd>
+                <dd className="font-medium text-[var(--brand-burgundy-dark)] sm:text-right">11:30–1:00 PM</dd>
               </div>
               <div className="flex flex-col gap-1 border-b border-[color:var(--border)] pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <dt className="text-[var(--muted)]">Where</dt>

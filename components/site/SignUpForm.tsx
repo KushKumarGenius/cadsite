@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ContentCard } from "@/components/site/ContentCard";
+import { SignUpClosedModal } from "@/components/site/SignUpClosedModal";
 
 const fieldClass =
   "mt-1.5 w-full min-h-11 rounded-md border border-[color:var(--border)] px-3 py-2.5 text-base text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]";
@@ -9,10 +11,42 @@ const fieldClass =
 const textareaClass =
   "mt-1.5 w-full resize-y rounded-md border border-[color:var(--border)] px-3 py-2.5 text-base text-[var(--foreground)] outline-none transition focus:border-[var(--brand-coral-muted)] focus:ring-2 focus:ring-[color:rgba(255,94,94,0.25)]";
 
-export function SignUpForm() {
+export function SignUpForm({ closed = false }: { closed?: boolean }) {
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [limitReached, setLimitReached] = useState(closed);
+  const [showClosedModal, setShowClosedModal] = useState(closed);
+
+  if (limitReached) {
+    return (
+      <>
+        {showClosedModal ? (
+          <SignUpClosedModal onClose={() => setShowClosedModal(false)} />
+        ) : null}
+        <ContentCard>
+          <h2 className="text-lg font-medium text-[var(--brand-burgundy-dark)]">
+            Sign-ups are full
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+            Thanks for your consideration — we&apos;ve reached our capacity for this session and
+            aren&apos;t accepting more sign-ups. We&apos;re sorry we can&apos;t take everyone this
+            time.
+          </p>
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            Questions?{" "}
+            <Link
+              href="/team"
+              className="font-medium text-[var(--brand-coral)] underline-offset-2 hover:underline"
+            >
+              Contact our team
+            </Link>
+            .
+          </p>
+        </ContentCard>
+      </>
+    );
+  }
 
   if (done) {
     return (
@@ -49,7 +83,12 @@ export function SignUpForm() {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
             });
-            const data = (await res.json()) as { ok?: boolean; error?: string };
+            const data = (await res.json()) as { ok?: boolean; error?: string; closed?: boolean };
+            if (res.status === 403 && data.closed) {
+              setLimitReached(true);
+              setShowClosedModal(true);
+              return;
+            }
             if (!res.ok || !data.ok) {
               setError(data.error ?? "Something went wrong. Try again.");
               return;

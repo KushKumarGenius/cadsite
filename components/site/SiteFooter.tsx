@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <p className="text-xs leading-snug text-[var(--muted)] sm:max-w-md sm:text-[13px]">
             <span className="font-semibold text-[var(--brand-burgundy-dark)]">CAD Crew</span> — Jul 13–23,
-            2026 · Mon–Thu · 12–1:30 PM · Cupertino Library.
+            2026 · Mon–Thu · 11:30–1:00 PM · Cupertino Library.
           </p>
           <div className="flex flex-wrap items-center gap-x-1 gap-y-2 text-xs text-[var(--muted)] sm:gap-x-3 sm:text-[13px]">
             <Link

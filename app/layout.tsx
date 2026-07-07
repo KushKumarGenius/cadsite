@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CAD Crew",
   description:
-    "Hands-on CAD for kids — July 13–23, 2026, Mon–Thu, 12–1:30 PM at Cupertino Library.",
+    "Hands-on CAD for kids — July 13–23, 2026, Mon–Thu, 11:30–1:00 PM at Cupertino Library.",
   // Favicons: `app/icon.png` + `app/apple-icon.png` (from cadcrew logo) — see Next.js file conventions
 };
 

@@ -17,7 +17,7 @@ export default function AboutPage() {
           Design and making for kids — summer{" "}
           <strong className="text-[var(--brand-burgundy-dark)]">July 13–23, 2026</strong>, meeting{" "}
           <strong className="text-[var(--brand-burgundy-dark)]">Monday through Thursday</strong>,{" "}
-          <strong className="text-[var(--brand-burgundy-dark)]">12–1:30 PM</strong> at the{" "}
+          <strong className="text-[var(--brand-burgundy-dark)]">11:30–1:00 PM</strong> at the{" "}
           <strong className="text-[var(--brand-burgundy-dark)]">Cupertino Library</strong>. Sessions are{" "}
           <strong className="text-[var(--brand-burgundy-dark)]">90 minutes</strong> with a break in the middle.
         </p>

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { postToGoogleSheetWebApp } from "@/lib/googleSheetWebhook";
+import { isSignupClosed, SIGNUP_CLOSED_MESSAGE } from "@/lib/signup";
 
 type Body = {
   studentName?: string;
@@ -12,6 +13,13 @@ type Body = {
 };
 
 export async function POST(req: Request) {
+  if (isSignupClosed()) {
+    return NextResponse.json(
+      { ok: false, closed: true, error: SIGNUP_CLOSED_MESSAGE },
+      { status: 403 },
+    );
+  }
+
   let raw: Body;
   try {
     raw = (await req.json()) as Body;
